@@ -13,7 +13,8 @@ phases:
   post_build:
     commands:
       - printf '[{"name":"mginx","imageUri":"%s"}]' 022085345551.dkr.ecr.us-east-1.amazonaws.com/mokaprod:codepipeline > imagedefinitions.json
+      - 'aws s3api get-object --bucket boto3-aanankm --key appspec.yaml appspec.yaml'
 artifacts:
   files:
     - imagedefinitions.json
-    - appspec.yml
+    - appspec.yaml
