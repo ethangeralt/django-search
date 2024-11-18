@@ -12,7 +12,7 @@ phases:
       - "docker push 022085345551.dkr.ecr.us-east-1.amazonaws.com/mokaprod:codepipeline"
   post_build:
     commands:
-      - printf '[{"name":"mginx","imageUri":"%s"}]' 022085345551.dkr.ecr.us-east-1.amazonaws.com/mokaprod:codepipeline > imagedefinitions.json
+      - printf '[{"name":"nginx","imageUri":"%s"}]' 022085345551.dkr.ecr.us-east-1.amazonaws.com/mokaprod:codepipeline > imagedefinitions.json
       - 'aws s3api get-object --bucket boto3-aanankm --key appspec.yaml appspec.yaml'
 artifacts:
   files:
