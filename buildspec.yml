@@ -8,7 +8,7 @@ phases:
   build:
     commands:
       - "docker build -t codepipeline:latest ."
-      - "docker tag codepipeline:latest 022085345551.dkr.ecr.us-east-1.amazonaws.com/mokaprod:codepipeline"
+      - "docker tag codepipeline:latest .dkr.ecr.us-east-1.amazonaws.com/mokaprod:codepipeline"
       - "docker push .dkr.ecr.us-east-1.amazonaws.com/mokaprod:codepipeline"
   post_build:
     commands:
