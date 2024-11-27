@@ -3,16 +3,16 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 022085345551.dkr.ecr.us-east-1.amazonaws.com"
+      - "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin .dkr.ecr.us-east-1.amazonaws.com"
       
   build:
     commands:
       - "docker build -t codepipeline:latest ."
       - "docker tag codepipeline:latest 022085345551.dkr.ecr.us-east-1.amazonaws.com/mokaprod:codepipeline"
-      - "docker push 022085345551.dkr.ecr.us-east-1.amazonaws.com/mokaprod:codepipeline"
+      - "docker push .dkr.ecr.us-east-1.amazonaws.com/mokaprod:codepipeline"
   post_build:
     commands:
-      - printf '[{"name":"nginx","imageUri":"%s"}]' 022085345551.dkr.ecr.us-east-1.amazonaws.com/mokaprod:codepipeline > imagedefinitions.json
+      - printf '[{"name":"nginx","imageUri":"%s"}]' .dkr.ecr.us-east-1.amazonaws.com/mokaprod:codepipeline > imagedefinitions.json
       - 'aws s3api get-object --bucket boto3-aanankm --key appspec.yaml appspec.yaml'
 artifacts:
   files:
